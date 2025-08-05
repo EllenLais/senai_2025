@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Tarefas</title>
+    <style>
+        body { font-family: sans-serif; padding: 2rem; }
+        .concluida { text-decoration: line-through; color: gray; }
+        ul { list-style: none; padding: 0; }
+        li { margin-bottom: 1rem; }
+    </style>
+</head>
+<body>
+    <h1>Minha Lista de Tarefas</h1>
+
+    <form action="/adicionar" method="POST">
+        <input type="text" name="descricao" placeholder="Nova tarefa" required>
+        <button type="submit">Adicionar</button>
+    </form>
+
+    <ul>
+        {% for tarefa in tarefas %}
+            <li>
+                <span class="{{ 'concluida' if tarefa.concluida else '' }}">
+                    {{ tarefa.descricao }}
+                </span>
+                <form action="/alternar/{{ tarefa.id }}" method="POST" style="display:inline;">
+                    <button type="submit">
+                        {% if tarefa.concluida %}
+                            Desmarcar
+                        {% else %}
+                            Concluir
+                        {% endif %}
+                    </button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
