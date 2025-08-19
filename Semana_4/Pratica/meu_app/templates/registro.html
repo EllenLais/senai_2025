@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Usuário</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #4a4a4a;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            min-height: 80px;
+        }
+
+        .error-message {
+            color: #d9534f;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background-color: #007bff;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .submit-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .flash-message {
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            background-color: #dff0d8;
+            color: #3c763d;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Registro de Usuário</h1>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="flash-message {{ category }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        <form method="POST" action="" novalidate>
+            {{ form.hidden_tag() }}
+
+            <div class="form-group">
+                {{ form.nome.label }}
+                {{ form.nome(placeholder="Digite seu nome") }}
+                {% for error in form.nome.errors %}
+                <div class="error-message">
+                    {{ error }}
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="form-group">
+                {{ form.email.label }}
+                {{ form.email(placeholder="exemplo@dominio.com") }}
+                {% for error in form.email.errors %}
+                <div class="error-message">
+                    {{ error }}
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="form-group">
+                {{ form.senha.label }}
+                {{ form.senha(placeholder="Digite uma senha") }}
+                {% for error in form.senha.errors %}
+                <div class="error-message">
+                    {{ error }}
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="form-group">
+                {{ form.confirmar_senha.label }}
+                {{ form.confirmar_senha(placeholder="Repita a senha") }}
+                {% for error in form.confirmar_senha.errors %}
+                <div class="error-message">
+                    {{ error }}
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="form-group">
+                {{ form.biografia.label }}
+                {{ form.biografia(placeholder="Fale um pouco sobre você") }}
+            </div>
+
+            <div class="form-group" style="display: flex; align-items: center;">
+                {{ form.aceitar_termos() }}
+                <label for="{{ form.aceitar_termos.id }}" style="margin-left: 8px; margin-top: 4px;">
+                    Aceito os termos de serviço
+                </label>
+                {% for error in form.aceitar_termos.errors %}
+                <div class="error-message">
+                    {{ error }}
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="form-group">
+                {{ form.submit(class="submit-btn") }}
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
