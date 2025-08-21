@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evento Cadastrado</title>
+</head>
+<body>
+    <div>
+        <h1>Evento cadastrado com sucesso!</h1>
+        <p><a href="/">Voltar ao início</a></p>
+        <hr>
+        <h2>Dados do Evento:</h2>
+        <ul>
+            <li><strong>Nome:</strong> {{ form.nome_evento.data }}</li>
+            <li><strong>Data:</strong> {{ form.data_evento.data }}</li>
+            <li><strong>Organizador:</strong> {{ form.organizador.data }}</li>
+            <li><strong>E-mail:</strong> {{ form.email.data }}</li>
+            <li><strong>Tipo:</strong> {{ form.tipo_evento.data }}</li>
+            <li><strong>Descrição:</strong> {{ form.descricao.data }}</li>
+        </ul>
+    </div>
+</body>
+</html>
