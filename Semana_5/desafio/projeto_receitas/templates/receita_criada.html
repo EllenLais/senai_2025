@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block titulo %}Receita Criada{% endblock %}
+{% block conteudo %}
+<h2>Receita Criada</h2>
+<div class="card recipe-card">
+    <div class="recipe-section">
+        <h3>Nome:</h3>
+        <p>{{ receita.nome }}</p>
+    </div>
+    <div class="recipe-section">
+        <h3>Ingredientes:</h3>
+        <p>{{ receita.ingredientes }}</p>
+    </div>
+    <div class="recipe-section">
+        <h3>Modo de Preparo:</h3>
+        <p>{{ receita.modo_preparo }}</p>
+    </div>
+</div>
+
+<div class="links-revisao">
+    <a href="{{ url_for('nova_receita') }}">Criar Nova Receita</a>
+</div>
+{% endblock %}

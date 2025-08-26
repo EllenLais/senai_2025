@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block titulo %}Página Inicial{% endblock %}
+{% block conteudo %}
+<h1>Bem-vindo ao Construtor de Receitas!</h1>
+<p>Clique abaixo para criar sua receita:</p>
+<div class="links-revisao">
+<a href="{{ url_for('nova_receita') }}">Criar Nova Receita</a>
+</div>
+{% endblock %}
