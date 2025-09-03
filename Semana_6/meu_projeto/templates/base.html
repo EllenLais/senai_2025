@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Minha Estante Virtual</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f4f2f9;
+            margin: 0;
+            padding: 0;
+        }
+        nav {
+            background: #6a1b9a;
+            padding: 15px 30px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        nav .title {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        nav .links {
+            display: flex;
+            gap: 20px;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            padding: 6px 12px;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+        nav a:hover {
+            background: #4a0d6e;
+        }
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 25px auto;
+        }
+        .alert {
+            padding: 12px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+        }
+        .alert-success {
+            background: #e1bee7;
+            color: #4a0d6e;
+        }
+        .alert-warning {
+            background: #f3e5f5;
+            color: #6a1b9a;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="title">Minha Estante Virtual</div>
+        <div class="links">
+            <a href="{{ url_for('autores') }}">Autores</a>
+            <a href="{{ url_for('livros') }}">Livros</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert alert-{{ 'success' if category == 'success' else 'warning' }}">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

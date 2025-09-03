@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Livros</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f8f4fc;
+            color: #333;
+            margin: 0;
+            padding-top: 70px; /* espaço para a barra fixa */
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Barra fixa superior */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #6a0dad;
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+        .navbar a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h1, h2 { color: #6a0dad; }
+        form { margin-bottom: 2rem; }
+        .form-group { margin-bottom: 1rem; }
+        label { display: block; margin-bottom: .5rem; font-weight: bold; color: #6a0dad; }
+        input[type="text"], input[type="number"], select { width: 100%; padding: 0.8rem; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
+        button { background-color: #6a0dad; color: white; padding: 0.8rem 1.5rem; border: none; border-radius: 5px; cursor: pointer; font-size: 1rem; }
+        button:hover { background-color: #580b9e; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 0.8rem; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background-color: #f3e6fa; color: #6a0dad; }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        Minha Estante |
+        <a href="{{ url_for('autores') }}">Autores</a> |
+        <a href="{{ url_for('livros') }}">Livros</a>
+    </div>
+
+    <div class="container">
+        <h1>Adicionar Novo Livro</h1>
+        <form action="/livros" method="POST">
+            <div class="form-group">
+                <label for="titulo">Título:</label>
+                <input type="text" id="titulo" name="titulo" required>
+            </div>
+            <div class="form-group">
+                <label for="ano_publicacao">Ano de Publicação:</label>
+                <input type="number" id="ano_publicacao" name="ano_publicacao" required>
+            </div>
+            <div class="form-group">
+                <label for="autor_id">Autor:</label>
+                <select name="autor_id" id="autor_id" required>
+                    <option value="" disabled selected>-- Selecione um autor --</option>
+                    {% for autor in autores %}
+                        <option value="{{ autor.id }}">{{ autor.nome }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit">Adicionar Livro</button>
+        </form>
+
+        <h2>Livros Cadastrados</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Título</th>
+                    <th>Ano</th>
+                    <th>Autor</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for livro in livros %}
+                <tr>
+                    <td>{{ livro.id }}</td>
+                    <td>{{ livro.titulo }}</td>
+                    <td>{{ livro.ano_publicacao }}</td>
+                    <td>{{ livro.autor.nome }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="4" style="text-align:center;">Nenhum livro cadastrado ainda.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+
+
