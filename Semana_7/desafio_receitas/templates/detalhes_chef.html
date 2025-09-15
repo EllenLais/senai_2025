@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="chef-profile">
+        <div class="chef-header">
+            <div class="chef-avatar">
+                <i class="fas fa-chef-hat"></i>
+            </div>
+            <div class="chef-info">
+                <h2>{{ chef.nome }}</h2>
+                <p>Especialidade: {{ chef.perfil.especialidade }}</p>
+                <p>Anos de experiência: {{ chef.perfil.anos_experiencia }}</p>
+            </div>
+        </div>
+        
+        <div class="chef-stats">
+            <div class="stat">
+                <div class="stat-value">{{ chef.receitas|length }}</div>
+                <div class="stat-label">Receitas</div>
+            </div>
+        </div>
+    </div>
+    
+    <h2 class="page-title">Receitas de {{ chef.nome }}</h2>
+    
+    <div class="card-grid">
+        {% for receita in chef.receitas %}
+        <div class="card">
+            <div class="card-img">
+                <i class="fas fa-utensils"></i>
+            </div>
+            <div class="card-content">
+                <h2 class="card-title">{{ receita.titulo }}</h2>
+                <p class="card-text">{{ receita.instrucoes[:100] }}...</p>
+                <div class="tags">
+                    {% for ingrediente in receita.ingredientes %}
+                    <span class="tag">{{ ingrediente.nome }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

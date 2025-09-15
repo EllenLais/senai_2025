@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1 class="page-title">Criar Nova Receita</h1>
+    
+    <div style="max-width: 800px; margin: 0 auto;">
+        <form method="POST">
+            <div class="form-group">
+                <label for="titulo" class="form-label">Título da Receita</label>
+                <input type="text" id="titulo" name="titulo" class="form-control" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="instrucoes" class="form-label">Instruções</label>
+                <textarea id="instrucoes" name="instrucoes" class="form-control" required></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="chef_id" class="form-label">Chef</label>
+                <select id="chef_id" name="chef_id" class="form-control" required>
+                    <option value="">Selecione um chef</option>
+                    {% for chef in chefs %}
+                    <option value="{{ chef.id }}">{{ chef.nome }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="ingredientes" class="form-label">Ingredientes (separados por vírgula)</label>
+                <input type="text" id="ingredientes" name="ingredientes" class="form-control" 
+                       placeholder="Ex: Farinha, Ovos, Açúcar, Manteiga" required>
+            </div>
+            
+            <button type="submit" class="btn">Criar Receita</button>
+            <a href="{{ url_for('index') }}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+{% endblock %}

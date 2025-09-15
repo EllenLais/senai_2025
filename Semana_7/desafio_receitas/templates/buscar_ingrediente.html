@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1 class="page-title">Receitas com {{ ingrediente.nome }}</h1>
+    
+    <div class="card-grid">
+        {% for receita in ingrediente.receitas %}
+        <div class="card">
+            <div class="card-img">
+                <i class="fas fa-utensils"></i>
+            </div>
+            <div class="card-content">
+                <h2 class="card-title">{{ receita.titulo }}</h2>
+                <p class="card-subtitle">
+                    <i class="fas fa-user"></i>
+                    Por {{ receita.chef.nome }}
+                </p>
+                <div class="tags">
+                    {% for ingrediente in receita.ingredientes %}
+                    <span class="tag">{{ ingrediente.nome }}</span>
+                    {% endfor %}
+                </div>
+                <a href="{{ url_for('detalhes_chef', chef_id=receita.chef.id) }}" class="btn">Ver Chef</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
