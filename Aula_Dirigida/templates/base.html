@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}CRUD FastAPI{% endblock %}</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header>
+    <h1>CRUD com FastAPI + Jinja2 + SQLite</h1>
+    <nav>
+      <a href="/">Início</a> |
+      <a href="/novo">Novo Item</a>
+    </nav>
+  </header>
+
+  <main>
+    {% if mensagem %}
+      <div class="alert">{{ mensagem }}</div>
+    {% endif %}
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>
